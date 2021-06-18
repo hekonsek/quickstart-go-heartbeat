@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quickstart-go-heartbeat
+  labels:
+    app: quickstart-go-heartbeat
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: quickstart-go-heartbeat
+  template:
+    metadata:
+      labels:
+        app: quickstart-go-heartbeat
+      annotations:
+       prometheus.io/scrape: 'true'
+    spec:
+      containers:
+        - name: quickstart-go-heartbeat
+          image: hekonsek/quickstart-go-heartbeat
+          ports:
+            - containerPort: 9090
